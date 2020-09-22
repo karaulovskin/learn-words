@@ -71,8 +71,28 @@ class App extends Component {
 
     handleDeletedItem = (id) => {
         this.setState(({ wordArr }) => {
+            const idx = wordArr.filter((i) => i.id !== id);
+
             return {
-                wordArr: wordArr.filter((i) => i.id !== id)
+                wordArr: idx
+            }
+        })
+    };
+
+    handleAddedItem = (eng, rus) => {
+        this.setState(({ wordArr }) => {
+            let idx = 0;
+            wordArr.forEach((elem) => {
+                idx += elem.id
+            });
+            const newWord = {
+                eng: eng,
+                rus: rus,
+                id: idx
+            };
+
+            return {
+                wordArr: [...wordArr, newWord]
             }
         })
     };
@@ -100,6 +120,7 @@ class App extends Component {
                 <ContentBlock>
                     <CardList
                         handleDeletedItem={this.handleDeletedItem}
+                        handleAddedItem={this.handleAddedItem}
                         item={ wordArr }
                     />
                 </ContentBlock>

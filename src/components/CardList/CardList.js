@@ -25,6 +25,7 @@ class CardList extends Component {
         e.preventDefault();
 
         this.setState(({ eng, rus }) => {
+            this.props.handleAddedItem(eng, rus);
             return {
                 label: eng +' '+ rus,
                 eng: '',
